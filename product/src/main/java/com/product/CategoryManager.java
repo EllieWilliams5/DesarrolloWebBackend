@@ -3,6 +3,8 @@ package com.product;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.product.api.entity.Category;
+
 public class CategoryManager {
 
 	   
