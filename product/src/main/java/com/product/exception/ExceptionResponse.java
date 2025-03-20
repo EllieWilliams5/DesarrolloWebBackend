@@ -1,17 +1,17 @@
 package com.product.exception;
 
-import java.time.*;
+// Por qué falla??!!!
+import java.time.LocalDateTime;
 
 import org.springframework.http.HttpStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-// import org.springframework.http.ResponseEntity;
-// import org.springframework.web.bind.annotation.*;
-// import org.springframework.web.context.request.*;
-// import org.springframework.web.servlet.mvc.method.annotation.*;
-
+/**
+ * Clase para representar la estructura de la respuesta en caso de excepción.
+ */
 public class ExceptionResponse {
 
+    // Marca de tiempo en la que ocurrió la excepción.
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
 	private LocalDateTime timestamp;
 	
@@ -20,9 +20,14 @@ public class ExceptionResponse {
 	private String message;
 	private String path;
 	
+	/**
+     * Constructor por defecto.
+     */
 	public ExceptionResponse() {
-		
+	
 	}
+	
+	// Getters y Setters
 	
 	public LocalDateTime getTimestamp() {
 		return timestamp;
