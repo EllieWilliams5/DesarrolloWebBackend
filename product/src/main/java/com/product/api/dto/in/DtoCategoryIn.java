@@ -1,14 +1,14 @@
-package com.product.api.dto;
+package com.product.api.dto.in;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
 
 /**
- * ----- Clase y Paquete nuevos -----
- * +++++ Punto 2 de la práctica 5 +++++  
  * DTO para la creación y actualización de categorías.
  */
 public class DtoCategoryIn {
+	
+	// Atributos 
 	
     /**
      * Nombre de la categoría.

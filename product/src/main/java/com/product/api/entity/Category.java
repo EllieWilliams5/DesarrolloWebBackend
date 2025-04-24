@@ -14,10 +14,7 @@ import jakarta.persistence.Table;
 @Table(name = "category")
 public class Category {
 
-    /**
-     * +++++ Punto 1 de la práctica 5 +++++
-     * Actualización en el formato de los atributos para implementar CRUD completo
-     */
+	// Atributos 
 	
 	// >>> Id <<<
 	@Id

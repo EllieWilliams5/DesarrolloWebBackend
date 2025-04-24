@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.product.api.dto.DtoCategoryIn;
+import com.product.api.dto.in.DtoCategoryIn;
 import com.product.api.entity.Category;
 import com.product.api.repository.RepoCategory;
 import com.product.common.dto.ApiResponse;
@@ -38,9 +38,6 @@ public class SvcCategoryImp implements SvcCategory {
     		throw new ApiException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al consultar la base de datos");
     	}
     }
-
-    // Nuevos métodos. 
-    // +++++ Punto 5 de la práctica 5. jeje +++++
 
     /**
      * Regresa únicamente las categorías activas (status = 1).
