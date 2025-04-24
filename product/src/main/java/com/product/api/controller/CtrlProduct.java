@@ -23,6 +23,9 @@ import com.product.api.service.SvcProduct;
 import com.product.common.dto.ApiResponse;
 import com.product.exception.ApiException;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import jakarta.validation.Valid;
 
 /**
@@ -32,6 +35,7 @@ import jakarta.validation.Valid;
  */
 @RestController
 @RequestMapping("/product")
+@Tag(name = "product", description = "Administración de Productos")
 public class CtrlProduct {
 
     // Inyección del servicio que tiene la logica para productos
@@ -43,6 +47,7 @@ public class CtrlProduct {
      * Consulta todos los productos disponibles.
      */
 	@GetMapping
+	@Operation(summary = "Lista todos los productos", description = "Devuelve la lista completa de los productos registrados.")
 	public ResponseEntity<List<DtoProductListOut>> getProducts() {
 		return svc.getProducts();
 	}
@@ -52,6 +57,7 @@ public class CtrlProduct {
      * Consulta el detalle de un producto, incluyendo sus imágenes en base 64.
      */
 	@GetMapping("/{id}")
+	@Operation(summary = "Consulta un producto", description = "Muestra el detalle de un producto, incluyendo sus imágenes en base64.")
 	public ResponseEntity<DtoProductOut> getProduct(@PathVariable Integer id) {
 		return svc.getProduct(id);
 	}
@@ -63,6 +69,7 @@ public class CtrlProduct {
      * Valida que los datos cumplan las restricciones anotadas en el dto.
      */
 	@PostMapping
+	@Operation(summary = "Crea un producto", description = "Registra un nuevo producto con en el sistema.")
 	public ResponseEntity<ApiResponse> createProduct(@Valid @RequestBody DtoProductIn in, BindingResult bindingResult) {
 		if (bindingResult.hasErrors())
 			throw new ApiException(HttpStatus.BAD_REQUEST, bindingResult.getFieldError().getDefaultMessage());
@@ -75,6 +82,7 @@ public class CtrlProduct {
      * Actualiza un producto existente con nuevos datos.
      */
 	@PutMapping("/{id}")
+	@Operation(summary = "Actualiza un producto", description = "Modifica la información de un producto existente.")
 	public ResponseEntity<ApiResponse> updateProduct(@PathVariable Integer id, @Valid @RequestBody DtoProductIn in,
 			BindingResult bindingResult) {
 		if (bindingResult.hasErrors())
@@ -88,6 +96,7 @@ public class CtrlProduct {
      * Activa un producto.
      */
 	@PatchMapping("/{id}/enable")
+	@Operation(summary = "Activa un producto", description = "Establece el estado del producto como activo (Status = 1).")
 	public ResponseEntity<ApiResponse> enableProduct(@PathVariable Integer id) {
 		return svc.enableProduct(id);
 	}
@@ -98,6 +107,7 @@ public class CtrlProduct {
      * Desactiva un producto.
      */
 	@PatchMapping("/{id}/disable")
+	@Operation(summary = "Desactiva un producto", description = "Establece el estado del producto como inactivo (Status = 0).")
 	public ResponseEntity<ApiResponse> disableProduct(@PathVariable Integer id) {
 		return svc.disableProduct(id);
 	}
