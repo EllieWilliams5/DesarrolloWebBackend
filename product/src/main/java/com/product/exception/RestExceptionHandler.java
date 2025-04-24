@@ -8,9 +8,20 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.*;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+/**
+ * Manejador global de excepciones para la API.
+ */
 @ControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 	
+    /**
+     * Maneja las excepciones de tipo {@link ApiException}.
+     * Captura errores específicos lanzados por la aplicación y devuelve una respuesta estructurada.
+     * 
+     * @param exception Excepción capturada.
+     * @param request Información de la solicitud HTTP en la que ocurrió el error.
+     * @return ResponseEntity con el objeto {@link ExceptionResponse} y el código de estado HTTP correspondiente.
+     */
 	@ExceptionHandler(ApiException.class)
 	protected ResponseEntity<ExceptionResponse> handleApiException(ApiException exception, WebRequest request){
 		ExceptionResponse response = new ExceptionResponse();
@@ -22,6 +33,14 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<>(response, response.getError());
 		}
 	
+	/**
+     * Maneja las excepciones de tipo {@link DBAccessException}.
+     * Captura errores relacionados con el acceso a la base de datos y devuelve una respuesta estructurada.
+     * 
+     * @param exception Excepción capturada.
+     * @param request Información de la solicitud HTTP en la que ocurrió el error.
+     * @return ResponseEntity con el objeto {@link ExceptionResponse} y el código de estado HTTP 500.
+     */
 	@ExceptionHandler(DBAccessException.class)
 	protected ResponseEntity<ExceptionResponse> DBAccessException(DBAccessException exception, WebRequest request){
 
@@ -37,4 +56,5 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<>(response, response.getError());
 	}
 
+	// Fin de la clase :)
 }
