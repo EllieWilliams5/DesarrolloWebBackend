@@ -24,6 +24,10 @@ import com.product.api.dto.in.DtoCategoryIn;
 import com.product.api.entity.Category;
 import com.product.exception.ApiException;
 
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import jakarta.validation.Valid;
 
 // Controlador para gestionar las categorías.
@@ -31,6 +35,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/category")
+@Tag(name = "category", description = "Catálogo de categorias")
 public class CtrlCategory {
 
 	@Autowired
@@ -39,6 +44,7 @@ public class CtrlCategory {
 	// Método para obtener todas las categorias (en forma de Lista) registradas
 	// en la base de datos 
     @GetMapping
+    @Operation(summary = "Lista todas las categorías", description = "Devuelve todas las categorías registradas, tanto activas como inactivas.")
     public ResponseEntity<List<Category>> darCategorias() {
         return svc.getCategories();
     }
@@ -53,6 +59,7 @@ public class CtrlCategory {
      * @return Lista de categorías de Status = 1.
      */
 	@GetMapping("/active")
+	@Operation(summary = "Lista categorías activas", description = "Devuelve las categorías cuyo status = 1.")
 	public ResponseEntity<List<Category>> getActiveCategories() {
 		return svc.getActiveCategories();
 	}
@@ -63,7 +70,8 @@ public class CtrlCategory {
      * @return Categoría correspondiente al id proporcionado.
      */
 	@GetMapping("/{id}")
-	public ResponseEntity<Category> getRegion(@PathVariable int id) {
+    @Operation(summary = "Consulta una categoria", description = "Retorna los detalles de una categoria especifica según su ID.")
+	public ResponseEntity<Category> getCategory(@PathVariable int id) {
 		return svc.getCategory(id);
 	}
 	
@@ -75,6 +83,7 @@ public class CtrlCategory {
      * @throws ApiException, si los datos no cumplen con los requisitos de validación.
      */
 	@PostMapping
+	@Operation(summary = "Crea una categoria", description = "Registra una nueva categoría dentro del sistema.")
 	public ResponseEntity<ApiResponse> createCategory(@Valid @RequestBody DtoCategoryIn in, BindingResult bindingResult) {
 		if (bindingResult.hasErrors())
 			throw new ApiException(HttpStatus.BAD_REQUEST, bindingResult.getFieldError().getDefaultMessage());
@@ -91,6 +100,7 @@ public class CtrlCategory {
      * @throws ApiException, si los datos no cumplen con los requisitos de validación.
      */
 	@PutMapping("/{id}")
+	@Operation(summary = "Actualiza una categoría", description = "Modifica los datos de una categoría registrada.")
 	public ResponseEntity<ApiResponse> updateCategory(@PathVariable int id, @Valid @RequestBody DtoCategoryIn in,
 			BindingResult bindingResult) {
 		if (bindingResult.hasErrors())
@@ -105,6 +115,7 @@ public class CtrlCategory {
      * @return Respuesta con el estado de la operación.
      */
 	@PatchMapping("/{id}/enable")
+	@Operation(summary = "Activa una categoría", description = "Cambia el estado de la categoría a activa (Status = 1).")
 	public ResponseEntity<ApiResponse> enableCategory(@PathVariable int id) {
 		return svc.enableCategory(id);
 	}
@@ -115,6 +126,7 @@ public class CtrlCategory {
      * @return Respuesta con el estado de la operación.
      */
 	@PatchMapping("/{id}/disable")
+	@Operation(summary = "Desactiva una categoría", description = "Cambia el estado de la categoría a inactiva (Status = 0).")
 	public ResponseEntity<ApiResponse> disableCategory(@PathVariable int id) {
 		return svc.disableCategory(id);
 	}
