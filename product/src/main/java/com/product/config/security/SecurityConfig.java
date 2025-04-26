@@ -18,7 +18,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.product.config.jwt.JwtAuthFilter;
 
-
+/**
+ * Define las políticas de autorización de endpoints, manejo de sesiones,
+ * filtros de autenticación, y codificación de contraseñas.
+ */
 @Configuration
 public class SecurityConfig {
 	

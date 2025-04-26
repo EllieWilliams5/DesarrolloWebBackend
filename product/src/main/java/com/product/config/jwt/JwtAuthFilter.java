@@ -16,6 +16,11 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+/**
+ * Filtro que intercepta cada solicitud HTTP para validar el token JWT.
+ * 
+ */
+
 @Component
 public class JwtAuthFilter extends OncePerRequestFilter {
 	

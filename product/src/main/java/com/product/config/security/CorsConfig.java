@@ -9,6 +9,10 @@ import org.springframework.web.cors.CorsConfigurationSource;
 
 import jakarta.servlet.http.HttpServletRequest;
 
+/**
+ * Esta clase permite definir las reglas de intercambio de recursos
+ * entre diferentes dominios 
+ */
 @Component
 public class CorsConfig implements CorsConfigurationSource{
 	

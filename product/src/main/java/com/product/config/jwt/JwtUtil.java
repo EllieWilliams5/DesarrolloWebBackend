@@ -10,6 +10,10 @@ import org.springframework.stereotype.Component;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 
+/**
+ * Esta clase permite extraer información de un token, 
+ * validar su autenticidad y vigencia.
+ */
 @Component
 public class JwtUtil {
 
